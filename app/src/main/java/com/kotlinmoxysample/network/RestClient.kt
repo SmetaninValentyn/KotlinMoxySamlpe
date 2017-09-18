@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RestClient {
 
-    private var baseUrl = "https://api.github.com"
+    private var baseUrl = BuildConfig.API_ENDPOINT
 
     /**
      * Check rest client statics api urls

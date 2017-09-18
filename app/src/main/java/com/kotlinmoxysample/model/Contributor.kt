@@ -5,19 +5,27 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 /**
- * Created by User on 16.07.2017.
+ * Created by Valentyn on 16.07.2017.
  */
 data class Contributor(
         val login: String,
         @SerializedName("html_url") val url: String?,
         val contributions: Int? = 0,
-        @SerializedName("avatar_url") val avatarUrl: String?) : Parcelable {
+        @SerializedName("avatar_url") val avatarUrl: String?,
+        val name: String?,
+        val company: String?,
+        val email: String?,
+        val location: String?) : Parcelable {
 
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
             parcel.readString(),
             parcel.readValue(Int::class.java.classLoader) as? Int,
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
+            parcel.readString(),
             parcel.readString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -25,6 +33,10 @@ data class Contributor(
         parcel.writeString(url)
         parcel.writeValue(contributions)
         parcel.writeString(avatarUrl)
+        parcel.writeString(name)
+        parcel.writeString(company)
+        parcel.writeString(email)
+        parcel.writeString(location)
     }
 
     override fun describeContents(): Int {

@@ -10,17 +10,39 @@ import com.arellomobile.mvp.MvpAppCompatActivity
  */
 abstract class BaseActivity : MvpAppCompatActivity() {
 
+    val ARG_TITLE : String = "arg_title"
+
+    var mTitle : String? = null
+
     var mBackstack: FragmentBackStack? = null
     private var mRetainer: FragmentBackStack.Retainer? = null
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         initRetainBackStack()
+        mTitle = savedInstanceState?.getString(ARG_TITLE)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initRetainBackStack()
+        mTitle = savedInstanceState?.getString(ARG_TITLE)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setToolbarTitle(mTitle ?: "")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putString(ARG_TITLE, getToolbarTitle().toString())
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        outState?.putString(ARG_TITLE, getToolbarTitle().toString())
     }
 
     private fun initRetainBackStack() {
@@ -44,6 +66,7 @@ abstract class BaseActivity : MvpAppCompatActivity() {
 
     abstract fun setToolbarTitle(title: String)
     abstract fun setToolbarTitle(@StringRes resId: Int)
+    abstract fun getToolbarTitle() : CharSequence?
     abstract fun showProgress(show: Boolean)
     abstract fun initFragmentBackStack(): FragmentBackStack?
 

@@ -21,7 +21,7 @@ class FragmentBackStack(var fragmentManager: FragmentManager,
         if (!addToBackStack) {
             // checking for baseActivity is alive
             val activity = fragment.activity
-            if (!activity.isDestroyed && !activity.isFinishing) {
+            if (activity != null && !activity.isDestroyed && !activity.isFinishing) {
                 clear()
             }
 

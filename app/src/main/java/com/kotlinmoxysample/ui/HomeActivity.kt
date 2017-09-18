@@ -25,6 +25,8 @@ class HomeActivity : BaseActivity() {
         toolbar.toolbar.title = resources.getString(resId)
     }
 
+    override fun getToolbarTitle(): CharSequence? = toolbar?.toolbar?.title
+
     override fun showProgress(show: Boolean) =
             if(show) progress.visibility = View.VISIBLE
             else progress.visibility =  View.GONE
@@ -32,7 +34,7 @@ class HomeActivity : BaseActivity() {
     override fun initFragmentBackStack() : FragmentBackStack? {
         if(mBackstack == null) {
             mBackstack = FragmentBackStack(supportFragmentManager, R.id.fragmentContainer)
-            mBackstack?.push(ContributorsFragment.newInstance())
+            mBackstack?.replace(ContributorsFragment.newInstance())
         }
         return mBackstack
     }

@@ -9,7 +9,13 @@ import io.reactivex.disposables.CompositeDisposable
  */
 abstract class BaseRxPresenter<V : MvpView> : MvpPresenter<V>() {
 
+    protected var view: V? = null
     protected var mDisposable: CompositeDisposable? = null
+
+    override fun attachView(view: V) {
+        super.attachView(view)
+        this.view = view
+    }
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

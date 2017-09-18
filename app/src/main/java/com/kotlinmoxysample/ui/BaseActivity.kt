@@ -12,7 +12,7 @@ abstract class BaseActivity : MvpAppCompatActivity() {
 
     val ARG_TITLE : String = "arg_title"
 
-    var mTitle : String? = null
+    private var mTitle : String? = null
 
     var mBackstack: FragmentBackStack? = null
     private var mRetainer: FragmentBackStack.Retainer? = null

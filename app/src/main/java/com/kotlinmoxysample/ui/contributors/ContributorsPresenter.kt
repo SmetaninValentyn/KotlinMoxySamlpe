@@ -18,7 +18,7 @@ import timber.log.Timber
 class ContributorsPresenter : BaseRxPresenter<ContributorsView>() {
 
     fun onContributorClick(contributor: Contributor?) {
-        viewState.toast(contributor.toString())
+        view?.toast(contributor.toString())
     }
 
     fun loadContributors() {
@@ -36,7 +36,7 @@ class ContributorsPresenter : BaseRxPresenter<ContributorsView>() {
 
                         onError = {
                             viewState.showProgress(false)
-                            viewState.toast(R.string.err_something_wrong)
+                            view?.toast(R.string.err_something_wrong)
                             Timber.e("Contributors ${it.message}")
                         }
                 )

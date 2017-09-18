@@ -17,8 +17,8 @@ import timber.log.Timber
 @InjectViewState
 class ContributorsPresenter : BaseRxPresenter<ContributorsView>() {
 
-    fun onContributorClick(contributor: Contributor?) {
-        view?.toast(contributor.toString())
+    fun onContributorClicked(contributor: Contributor?) {
+        view?.onContributorClick(contributor)
     }
 
     fun loadContributors() {

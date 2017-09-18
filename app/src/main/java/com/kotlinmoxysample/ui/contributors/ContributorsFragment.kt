@@ -51,10 +51,17 @@ class ContributorsFragment : BaseFragment(), ContributorsView {
         rvContributors.addItemDecoration(dividerItemDecoration)
 
         mAdapter = ContributorsAdapter(ArrayList()) {
-            mPresenter.onContributorClick(it)
+            mPresenter.onContributorClicked(it)
         }
 
         rvContributors.adapter = mAdapter
+    }
+
+    override fun onContributorClick(contributor: Contributor?) {
+        if(contributor != null) {
+            val intent = ContributorActivity.newIntent(mActivity, contributor)
+            startActivity(intent)
+        }
     }
 
     override fun showContributors(contributors: List<Contributor>?) {

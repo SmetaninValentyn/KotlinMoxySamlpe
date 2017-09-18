@@ -8,6 +8,7 @@ import com.kotlinmoxysample.ui.BaseFragmentView
  */
 interface ContributorsView : BaseFragmentView {
 
+    fun onContributorClick(contributor: Contributor?)
     fun showContributors(contributors: List<Contributor>?)
 
 }

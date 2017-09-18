@@ -11,6 +11,11 @@ class KotlinMoxyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
+        instance = this
     }
 
+    companion object {
+        lateinit var instance: KotlinMoxyApplication
+            private set
+    }
 }

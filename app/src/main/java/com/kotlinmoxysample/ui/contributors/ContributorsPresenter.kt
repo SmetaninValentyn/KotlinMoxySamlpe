@@ -1,6 +1,5 @@
 package com.kotlinmoxysample.ui.contributors
 
-import android.text.TextUtils
 import com.arellomobile.mvp.InjectViewState
 import com.kotlingithubapi.model.Contributor
 import com.kotlingithubapi.network.Api
@@ -38,7 +37,6 @@ class ContributorsPresenter : BaseRxPresenter<ContributorsView>() {
                         onError = {
                             viewState.showProgress(false)
                             viewState.toast(R.string.err_something_wrong)
-
                             Timber.e("Contributors ${it.message}")
                         }
                 )

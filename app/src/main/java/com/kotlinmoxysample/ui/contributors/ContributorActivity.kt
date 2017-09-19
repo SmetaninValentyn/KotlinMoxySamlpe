@@ -34,6 +34,10 @@ class ContributorActivity : BaseActivity(), ContributorView {
     }
 
     override fun showContributor(contributor: Contributor?) {
+        if(contributor?.login != null) {
+            setToolbarTitle(contributor.login)
+        }
+
         loadAvatar(contributor?.avatarUrl)
     }
 

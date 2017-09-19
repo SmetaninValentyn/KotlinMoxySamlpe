@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import com.arellomobile.mvp.presenter.InjectPresenter
 import com.kotlingithubapi.model.Contributor
 import com.kotlinmoxysample.R
 import com.kotlinmoxysample.ui.BaseActivity
@@ -18,9 +19,16 @@ import kotlinx.android.synthetic.main.activity_contributor.*
 // used activity for instead fragment for collapse toolbar
 class ContributorActivity : BaseActivity(), ContributorView {
 
+    @InjectPresenter
+    lateinit var mPresenter : ContributorPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contributor)
+
+        var contributor = intent.extras?.get(ARG_CONTRIBUTOR) as Contributor?
+
+        mPresenter.loadContributor(contributor?.login)
     }
 
     override fun setToolbarTitle(title: String) {

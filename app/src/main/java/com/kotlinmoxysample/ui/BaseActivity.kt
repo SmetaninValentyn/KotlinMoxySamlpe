@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.annotation.StringRes
 import com.arellomobile.mvp.MvpAppCompatActivity
+import com.kotlingithubapi.utils.toast
 
 /**
  * Created by Valentyn on 9/18/17.
  */
-abstract class BaseActivity : MvpAppCompatActivity() {
+abstract class BaseActivity : MvpAppCompatActivity(), BaseView {
 
     val ARG_TITLE : String = "arg_title"
 
@@ -64,10 +65,17 @@ abstract class BaseActivity : MvpAppCompatActivity() {
         }
     }
 
+    override fun toast(message: Int) {
+        this.applicationContext.toast(message)
+    }
+
+    override fun toast(message: String) {
+        this.applicationContext.toast(message)
+    }
+
     abstract fun setToolbarTitle(title: String)
     abstract fun setToolbarTitle(@StringRes resId: Int)
     abstract fun getToolbarTitle() : CharSequence?
-    abstract fun showProgress(show: Boolean)
     abstract fun initFragmentBackStack(): FragmentBackStack?
 
 

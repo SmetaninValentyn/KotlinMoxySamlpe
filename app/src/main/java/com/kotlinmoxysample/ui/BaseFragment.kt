@@ -3,12 +3,11 @@ package com.kotlinmoxysample.ui
 import android.os.Bundle
 import android.support.annotation.StringRes
 import com.arellomobile.mvp.MvpAppCompatFragment
-import com.kotlingithubapi.utils.toast
 
 /**
  * Created by Valentyn on 9/18/17.
  */
-abstract class BaseFragment : MvpAppCompatFragment(), BaseFragmentView {
+abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
 
     protected lateinit var mActivity: BaseActivity
 

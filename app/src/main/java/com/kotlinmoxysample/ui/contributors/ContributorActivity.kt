@@ -9,6 +9,7 @@ import com.kotlingithubapi.model.Contributor
 import com.kotlinmoxysample.R
 import com.kotlinmoxysample.ui.BaseActivity
 import com.kotlinmoxysample.ui.FragmentBackStack
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_contributor.*
 
 @SuppressLint("Registered")
@@ -27,8 +28,19 @@ class ContributorActivity : BaseActivity(), ContributorView {
         setContentView(R.layout.activity_contributor)
 
         var contributor = intent.extras?.get(ARG_CONTRIBUTOR) as Contributor?
+        showContributor(contributor)
 
         mPresenter.loadContributor(contributor?.login)
+    }
+
+    override fun showContributor(contributor: Contributor?) {
+        loadAvatar(contributor?.avatarUrl)
+    }
+
+    private fun loadAvatar(path: String?) {
+        if(path.isNullOrEmpty()) return
+
+        Picasso.with(this).load(path).into(imageToolbar)
     }
 
     override fun setToolbarTitle(title: String) {
@@ -41,16 +53,10 @@ class ContributorActivity : BaseActivity(), ContributorView {
 
     override fun getToolbarTitle(): CharSequence? = toolbar.title
 
-    override fun showProgress(show: Boolean) {
-        // TODO progress
-    }
+    override fun showProgress(show: Boolean) {}
 
     // activity without back stack
     override fun initFragmentBackStack(): FragmentBackStack? = null
-
-    override fun showContributor(contributor: Contributor) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     companion object {
         val ARG_CONTRIBUTOR = "arg_contributor"

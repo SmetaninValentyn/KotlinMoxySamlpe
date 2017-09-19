@@ -4,12 +4,12 @@ import android.support.annotation.StringRes
 import com.arellomobile.mvp.MvpView
 
 /**
- * Created by Valentyn on 9/18/17.
+ * Created by Valentyn on 9/19/17.
  */
-interface BaseFragmentView : MvpView {
+interface BaseView : MvpView {
 
-    fun showProgress(show: Boolean)
     fun toast(@StringRes message: Int)
     fun toast(message: String)
+    fun showProgress(show: Boolean)
 
 }

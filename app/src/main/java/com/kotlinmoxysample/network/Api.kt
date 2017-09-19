@@ -14,7 +14,7 @@ interface Api {
     fun repoContributors(@Path("owner") owner: String, @Path("repo") repo: String): Observable<List<Contributor>>
 
     @GET("/users/{login}")
-    fun getContributor(@Path("login") login: String): Observable<Contributor>
+    fun getContributor(@Path("login") login: String?): Observable<Contributor>
 
 
 }

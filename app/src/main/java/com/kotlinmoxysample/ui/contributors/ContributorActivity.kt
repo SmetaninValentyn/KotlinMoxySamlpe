@@ -39,22 +39,11 @@ class ContributorActivity : BaseActivity(), ContributorView {
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         val contributor = intent.extras?.get(ARG_CONTRIBUTOR) as Contributor?
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            val transitionName = intent.extras?.getString(ARG_TRANSITION_NAME)
-            if (!transitionName.isNullOrEmpty()) {
-                imageToolbar.transitionName = transitionName
-            }
-        }
+        setImageTransition(intent.extras?.getString(ARG_TRANSITION_NAME))
 
         showContributor(contributor)
 
         mPresenter.loadContributor(contributor?.login)
-    }
-
-    override fun onResume() {
-        super.onResume()
-
     }
 
     override fun showContributor(contributor: Contributor?) {
@@ -117,6 +106,14 @@ class ContributorActivity : BaseActivity(), ContributorView {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    fun setImageTransition(transitionName: String?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (!transitionName.isNullOrEmpty()) {
+                imageToolbar.transitionName = transitionName
+            }
+        }
     }
 
     override fun setToolbarTitle(title: String) {

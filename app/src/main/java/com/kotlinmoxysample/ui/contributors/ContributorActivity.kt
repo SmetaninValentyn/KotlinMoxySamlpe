@@ -32,6 +32,7 @@ class ContributorActivity : BaseActivity(), ContributorView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contributor)
+        supportPostponeEnterTransition()
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

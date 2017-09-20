@@ -1,5 +1,6 @@
 package com.kotlinmoxysample.ui.contributors
 
+import android.view.View
 import com.kotlingithubapi.model.Contributor
 import com.kotlinmoxysample.ui.BaseView
 
@@ -8,7 +9,7 @@ import com.kotlinmoxysample.ui.BaseView
  */
 interface ContributorsView : BaseView {
 
-    fun onContributorClick(contributor: Contributor?)
+    fun onContributorClick(contributor: Contributor?, avatarView: View? = null)
     fun showContributors(contributors: List<Contributor>?)
 
 }

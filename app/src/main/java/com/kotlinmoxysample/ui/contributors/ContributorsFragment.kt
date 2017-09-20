@@ -1,6 +1,8 @@
 package com.kotlinmoxysample.ui.contributors
 
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -10,6 +12,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.kotlingithubapi.model.Contributor
 import com.kotlinmoxysample.R
 import com.kotlinmoxysample.ui.BaseFragment
+import com.kotlinmoxysample.ui.contributors.ContributorsAdapter.ContributorClickListener
 import kotlinx.android.synthetic.main.fragment_contributors.*
 
 /**
@@ -50,17 +53,25 @@ class ContributorsFragment : BaseFragment(), ContributorsView {
                 LinearLayoutManager.VERTICAL)
         rvContributors.addItemDecoration(dividerItemDecoration)
 
-        mAdapter = ContributorsAdapter(ArrayList()) {
-            mPresenter.onContributorClicked(it)
-        }
+        mAdapter = ContributorsAdapter(
+                mActivity,
+                ArrayList(),
+                object : ContributorClickListener {
+                    override fun onContributorClick(contributor: Contributor?, viewAvatar: View?) {
+                        mPresenter.onContributorClicked(contributor, viewAvatar)
+                    }
+                }
+        )
 
         rvContributors.adapter = mAdapter
     }
 
-    override fun onContributorClick(contributor: Contributor?) {
+    override fun onContributorClick(contributor: Contributor?, avatarView: View?) {
         if(contributor != null) {
-            val intent = ContributorActivity.newIntent(mActivity, contributor)
-            startActivity(intent)
+            val intent = ContributorActivity.newIntent(mActivity, contributor, ViewCompat.getTransitionName(avatarView))
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+                    avatarView, ViewCompat.getTransitionName(avatarView))
+            startActivity(intent, options.toBundle())
         }
     }
 

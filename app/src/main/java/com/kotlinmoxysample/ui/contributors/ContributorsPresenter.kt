@@ -1,5 +1,6 @@
 package com.kotlinmoxysample.ui.contributors
 
+import android.view.View
 import com.arellomobile.mvp.InjectViewState
 import com.kotlingithubapi.model.Contributor
 import com.kotlingithubapi.network.Api
@@ -17,8 +18,8 @@ import timber.log.Timber
 @InjectViewState
 class ContributorsPresenter : BaseRxPresenter<ContributorsView>() {
 
-    fun onContributorClicked(contributor: Contributor?) {
-        view?.onContributorClick(contributor)
+    fun onContributorClicked(contributor: Contributor?, avatarView : View? = null) {
+        view?.onContributorClick(contributor, avatarView)
     }
 
     fun loadContributors() {

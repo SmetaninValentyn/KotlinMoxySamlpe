@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.kotlingithubapi.model.Contributor
 import com.kotlinmoxysample.R
@@ -27,6 +28,10 @@ class ContributorActivity : BaseActivity(), ContributorView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contributor)
 
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
         var contributor = intent.extras?.get(ARG_CONTRIBUTOR) as Contributor?
         showContributor(contributor)
 
@@ -45,6 +50,17 @@ class ContributorActivity : BaseActivity(), ContributorView {
         if(path.isNullOrEmpty()) return
 
         Picasso.with(this).load(path).into(imageToolbar)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun setToolbarTitle(title: String) {

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.kotlingithubapi.model.Contributor
 import com.kotlinmoxysample.R
@@ -12,6 +13,7 @@ import com.kotlinmoxysample.ui.BaseActivity
 import com.kotlinmoxysample.ui.FragmentBackStack
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_contributor.*
+import kotlinx.android.synthetic.main.contributor_content.*
 
 @SuppressLint("Registered")
 
@@ -42,8 +44,35 @@ class ContributorActivity : BaseActivity(), ContributorView {
         if(contributor?.login != null) {
             setToolbarTitle(contributor.login)
         }
-
         loadAvatar(contributor?.avatarUrl)
+
+        if(contributor?.name.isNullOrEmpty()) {
+            linearName.visibility = View.GONE
+        } else {
+            tvName.text = contributor?.name
+            linearName.visibility = View.VISIBLE
+        }
+
+        if(contributor?.email.isNullOrEmpty()) {
+            linearEmail.visibility = View.GONE
+        } else {
+            tvEmail.text = contributor?.email
+            linearEmail.visibility = View.VISIBLE
+        }
+
+        if(contributor?.company.isNullOrEmpty()) {
+            linearCompany.visibility = View.GONE
+        } else {
+            tvCompany.text = contributor?.company
+            linearCompany.visibility = View.VISIBLE
+        }
+
+        if(contributor?.location.isNullOrEmpty()) {
+            linearLocation.visibility = View.GONE
+        } else {
+            tvLocation.text = contributor?.location
+            linearLocation.visibility = View.VISIBLE
+        }
     }
 
     private fun loadAvatar(path: String?) {

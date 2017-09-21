@@ -3,11 +3,15 @@ package com.kotlingithubapi.model
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import io.objectbox.annotation.Entity
+import io.objectbox.annotation.Id
 
 /**
  * Created by Valentyn on 16.07.2017.
  */
+@Entity
 data class Contributor(
+        @Id(assignable = true) var id: Long,
         val login: String,
         @SerializedName("html_url") val url: String?,
         val contributions: Int? = 0,
@@ -19,6 +23,7 @@ data class Contributor(
 
 
     constructor(parcel: Parcel) : this(
+            parcel.readLong(),
             parcel.readString(),
             parcel.readString(),
             parcel.readValue(Int::class.java.classLoader) as? Int,
@@ -29,6 +34,7 @@ data class Contributor(
             parcel.readString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeLong(id)
         parcel.writeString(login)
         parcel.writeString(url)
         parcel.writeValue(contributions)
@@ -52,5 +58,6 @@ data class Contributor(
             return arrayOfNulls(size)
         }
     }
+
 
 }

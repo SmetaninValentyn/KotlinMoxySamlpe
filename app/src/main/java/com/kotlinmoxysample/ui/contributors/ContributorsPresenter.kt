@@ -6,6 +6,7 @@ import com.kotlingithubapi.model.Contributor
 import com.kotlingithubapi.network.Api
 import com.kotlingithubapi.network.RestClient
 import com.kotlinmoxysample.R
+import com.kotlinmoxysample.db.BaseDao
 import com.kotlinmoxysample.ui.BaseRxPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -26,6 +27,7 @@ class ContributorsPresenter : BaseRxPresenter<ContributorsView>() {
         viewState.showProgress(true)
         val d = RestClient().createService(Api::class.java)
                 .repoContributors("square", "retrofit")
+                .doOnNext { BaseDao().put(it) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
@@ -36,9 +38,16 @@ class ContributorsPresenter : BaseRxPresenter<ContributorsView>() {
                         },
 
                         onError = {
-                            viewState.showProgress(false)
-                            view?.toast(R.string.err_something_wrong)
                             Timber.e("Contributors ${it.message}")
+                            viewState.showProgress(false)
+
+                            val contributors = BaseDao().getAll<Contributor>()
+                            Timber.d("Contributors from db $contributors")
+                            if(contributors != null) {
+                                viewState.showContributors(contributors)
+                            } else {
+                                view?.toast(R.string.err_something_wrong)
+                            }
                         }
                 )
         mDisposable?.add(d)

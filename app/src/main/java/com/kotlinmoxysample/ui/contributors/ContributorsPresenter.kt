@@ -7,6 +7,7 @@ import com.kotlingithubapi.network.Api
 import com.kotlingithubapi.network.RestClient
 import com.kotlinmoxysample.R
 import com.kotlinmoxysample.db.BaseDao
+import com.kotlinmoxysample.db.ContributorsDao
 import com.kotlinmoxysample.ui.BaseRxPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
@@ -41,7 +42,7 @@ class ContributorsPresenter : BaseRxPresenter<ContributorsView>() {
                             Timber.e("Contributors ${it.message}")
                             viewState.showProgress(false)
 
-                            val contributors = BaseDao().getAll<Contributor>()
+                            val contributors = ContributorsDao().getContributors()
                             Timber.d("Contributors from db $contributors")
                             if(contributors != null) {
                                 viewState.showContributors(contributors)

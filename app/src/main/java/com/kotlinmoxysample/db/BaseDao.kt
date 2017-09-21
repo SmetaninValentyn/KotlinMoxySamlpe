@@ -6,7 +6,7 @@ import timber.log.Timber
 /**
  * Created by Valentyn on 9/21/17.
  */
-class BaseDao {
+open class BaseDao {
 
     var boxStore = KotlinMoxyApplication.instance.boxStore
 

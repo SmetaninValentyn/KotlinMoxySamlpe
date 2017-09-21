@@ -14,14 +14,14 @@ import kotlinx.android.synthetic.main.item_contributor.view.*
 /**
  * Created by Valentyn on 9/18/17.
  */
-class ContributorsAdapter(val context: Context,
+class ContributorsAdapter(private val context: Context,
                           var items: List<Contributor>?,
-                          val listener: ContributorClickListener?) : RecyclerView.Adapter<ContributorsAdapter.ViewHolder>() {
+                          private val listener: ContributorClickListener?) : RecyclerView.Adapter<ContributorsAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contributor = items?.get(position)
 
-        Picasso.with(context).load(contributor?.avatarUrl).into(holder.ivAvatar)
+        Picasso.with(context).load(contributor?.avatarUrl).placeholder(R.mipmap.ic_launcher).into(holder.ivAvatar)
         holder.tvLogin.text = contributor?.login
         ViewCompat.setTransitionName(holder.ivAvatar, contributor?.login)
 

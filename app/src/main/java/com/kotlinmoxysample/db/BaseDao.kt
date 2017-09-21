@@ -8,7 +8,7 @@ import timber.log.Timber
  */
 open class BaseDao {
 
-    var boxStore = KotlinMoxyApplication.instance.boxStore
+    val boxStore = KotlinMoxyApplication.instance.boxStore
 
     inline fun <reified T> put(entity: T?) {
         if(entity == null) return

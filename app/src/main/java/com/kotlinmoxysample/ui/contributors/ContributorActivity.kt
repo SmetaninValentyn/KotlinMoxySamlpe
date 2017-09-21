@@ -43,7 +43,7 @@ class ContributorActivity : BaseActivity(), ContributorView {
 
         showContributor(contributor)
 
-        mPresenter.loadContributor(contributor?.login)
+        mPresenter.loadContributor(contributor)
     }
 
     override fun showContributor(contributor: Contributor?) {

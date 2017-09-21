@@ -48,7 +48,7 @@ class ContributorPresenter : BaseRxPresenter<ContributorView>() {
         mDisposable?.add(d)
     }
 
-    fun showFromDb(id : Long?) {
+    private fun showFromDb(id : Long?) {
         if(id == null)  {
             // TODO show 'try again view'
             view?.toast(R.string.err_something_wrong)

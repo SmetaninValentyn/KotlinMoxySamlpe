@@ -21,7 +21,7 @@ class ContributorsAdapter(private val context: Context,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val contributor = items?.get(position)
 
-        Picasso.with(context).load(contributor?.avatarUrl).placeholder(R.mipmap.ic_launcher).into(holder.ivAvatar)
+        Picasso.with(context).load(contributor?.avatarUrl).placeholder(R.drawable.ic_github_placeholder).into(holder.ivAvatar)
         holder.tvLogin.text = contributor?.login
         ViewCompat.setTransitionName(holder.ivAvatar, contributor?.login)
 

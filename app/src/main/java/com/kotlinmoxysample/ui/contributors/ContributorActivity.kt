@@ -32,7 +32,6 @@ class ContributorActivity : BaseActivity(), ContributorView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contributor)
-        supportPostponeEnterTransition()
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -84,7 +83,7 @@ class ContributorActivity : BaseActivity(), ContributorView {
     private fun loadAvatar(path: String?) {
         if(path.isNullOrEmpty()) return
 
-        Picasso.with(this).load(path).into(imageToolbar,
+        Picasso.with(this).load(path).placeholder(R.drawable.ic_github_placeholder).into(imageToolbar,
                 object : Callback {
                     override fun onSuccess() {
                         supportStartPostponedEnterTransition()

@@ -2,6 +2,7 @@ package com.kotlinmoxysample.db
 
 import com.kotlingithubapi.model.Contributor
 import com.kotlingithubapi.model.Contributor_
+import io.reactivex.Observable
 import timber.log.Timber
 
 /**
@@ -15,4 +16,7 @@ class ContributorsDao : BaseDao() {
         Timber.d("Find contributors $contributors")
         return contributors
     }
+
+    fun getContributorsObservable() : Observable<List<Contributor>>
+            = Observable.just(getContributors())
 }

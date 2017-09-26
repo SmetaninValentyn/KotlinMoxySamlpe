@@ -37,10 +37,10 @@ class ContributorActivity : BaseActivity(), ContributorView {
     fun providePresenter(): ContributorPresenter = mPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        KotlinMoxyApplication.contributorsComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contributor)
 
-        KotlinMoxyApplication.contributorsComponent.inject(this)
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

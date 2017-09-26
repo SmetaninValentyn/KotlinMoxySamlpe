@@ -39,8 +39,8 @@ class ContributorsFragment : BaseFragment(), ContributorsView {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         KotlinMoxyApplication.contributorsComponent.inject(this)
+        super.onCreate(savedInstanceState)
         retainInstance = true
     }
 

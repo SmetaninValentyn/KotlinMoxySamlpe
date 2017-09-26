@@ -4,7 +4,6 @@ import android.content.Context
 import com.kotlingithubapi.model.MyObjectBox
 import com.kotlingithubapi.network.Api
 import com.kotlingithubapi.network.RestClient
-import com.kotlinmoxysample.db.BaseDao
 import dagger.Module
 import dagger.Provides
 import io.objectbox.BoxStore
@@ -20,23 +19,16 @@ class AppModule(val app: KotlinMoxyApplication) {
     @Provides
     @NotNull
     @Singleton
-    fun provideContext(): KotlinMoxyApplication = app
+    fun providesContext(): Context = app
 
     @Provides
     @NotNull
     @Singleton
-    fun provideApiClient(): Api = RestClient().createService(Api::class.java)
+    fun providesApiClient(): Api = RestClient().createService(Api::class.java)
 
     @Provides
     @NotNull
     @Singleton
-    fun provideBoxStore(context: Context): BoxStore = MyObjectBox.builder().androidContext(context).build()
-
-    @Provides
-    @NotNull
-    @Singleton
-    fun provideBaseDao(boxStore: BoxStore): BaseDao = BaseDao(boxStore)
-
-
+    fun providesBoxStore(): BoxStore = MyObjectBox.builder().androidContext(app).build()
 
 }

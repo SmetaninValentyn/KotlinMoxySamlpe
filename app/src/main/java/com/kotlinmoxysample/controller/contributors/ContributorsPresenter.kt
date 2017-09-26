@@ -1,4 +1,4 @@
-package com.kotlinmoxysample.ui.contributors
+package com.kotlinmoxysample.controller.contributors
 
 import android.view.View
 import com.arellomobile.mvp.InjectViewState
@@ -6,9 +6,8 @@ import com.kotlingithubapi.model.Contributor
 import com.kotlingithubapi.network.Api
 import com.kotlingithubapi.network.RestClient
 import com.kotlinmoxysample.R
-import com.kotlinmoxysample.db.BaseDao
 import com.kotlinmoxysample.db.ContributorsDao
-import com.kotlinmoxysample.ui.BaseRxPresenter
+import com.kotlinmoxysample.controller.BaseRxPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -18,7 +17,7 @@ import timber.log.Timber
  * Created by Valentyn on 9/18/17.
  */
 @InjectViewState
-class ContributorsPresenter : BaseRxPresenter<ContributorsView>() {
+class ContributorsPresenter(val dao: ContributorsDao?, val api: Api) : BaseRxPresenter<ContributorsView>() {
 
     fun onContributorClicked(contributor: Contributor?, avatarView : View? = null) {
         view?.onContributorClick(contributor, avatarView)
@@ -28,7 +27,7 @@ class ContributorsPresenter : BaseRxPresenter<ContributorsView>() {
         viewState.showProgress(true)
         val d = RestClient().createService(Api::class.java)
                 .repoContributors("square", "retrofit")
-                .doOnNext { BaseDao().put(it) }
+                .doOnNext { dao?.put(it) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
@@ -42,7 +41,7 @@ class ContributorsPresenter : BaseRxPresenter<ContributorsView>() {
                             Timber.e("Contributors ${it.message}")
                             viewState.showProgress(false)
 
-                            val contributors = ContributorsDao().getContributors()
+                            val contributors = dao?.getContributors()
                             Timber.d("Contributors from db $contributors")
                             if(contributors != null) {
                                 viewState.showContributors(contributors)

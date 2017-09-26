@@ -1,4 +1,4 @@
-package com.kotlinmoxysample.ui
+package com.kotlinmoxysample.controller
 
 import android.os.Bundle
 import android.os.PersistableBundle

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.contributors.ContributorActivity"
+    tools:context=".controller.contributors.ContributorActivity"
     tools:showIn="@layout/activity_contributor">
 
     <LinearLayout

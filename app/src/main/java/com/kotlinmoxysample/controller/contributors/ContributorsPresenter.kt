@@ -25,8 +25,7 @@ class ContributorsPresenter(val dao: ContributorsDao?, val api: Api) : BaseRxPre
 
     fun loadContributors() {
         viewState.showProgress(true)
-        val d = RestClient().createService(Api::class.java)
-                .repoContributors("square", "retrofit")
+        val d = api.repoContributors("square", "retrofit")
                 .doOnNext { dao?.put(it) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

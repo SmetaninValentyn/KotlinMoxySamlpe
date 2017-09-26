@@ -1,15 +1,13 @@
 package com.kotlinmoxysample.db
 
-import com.kotlinmoxysample.KotlinMoxyApplication
+import io.objectbox.BoxStore
 import io.reactivex.Observable
 import timber.log.Timber
 
 /**
  * Created by Valentyn on 9/21/17.
  */
-open class BaseDao {
-
-    val boxStore = KotlinMoxyApplication.instance.boxStore
+open class BaseDao(val boxStore: BoxStore) {
 
     inline fun <reified T> put(entity: T?) {
         if (entity == null) return

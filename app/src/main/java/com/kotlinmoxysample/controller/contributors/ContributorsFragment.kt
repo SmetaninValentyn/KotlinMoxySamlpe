@@ -1,4 +1,4 @@
-package com.kotlinmoxysample.ui.contributors
+package com.kotlinmoxysample.controller.contributors
 
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
@@ -11,15 +11,19 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.kotlingithubapi.model.Contributor
 import com.kotlinmoxysample.R
-import com.kotlinmoxysample.ui.BaseFragment
-import com.kotlinmoxysample.ui.contributors.ContributorsAdapter.ContributorClickListener
+import com.kotlinmoxysample.app.KotlinMoxyApplication
+import com.kotlinmoxysample.controller.BaseFragment
+import com.kotlinmoxysample.controller.contributors.ContributorsAdapter.ContributorClickListener
 import kotlinx.android.synthetic.main.fragment_contributors.*
+import javax.inject.Inject
+import com.arellomobile.mvp.presenter.ProvidePresenter
 
 /**
  * Created by Valentyn on 9/18/17.
  */
 class ContributorsFragment : BaseFragment(), ContributorsView {
 
+    @Inject
     @InjectPresenter
     lateinit var mPresenter: ContributorsPresenter
 
@@ -30,7 +34,12 @@ class ContributorsFragment : BaseFragment(), ContributorsView {
         mActivity.setToolbarTitle(R.string.contributors)
     }
 
+    @ProvidePresenter
+    fun providePresenter(): ContributorsPresenter = mPresenter
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        KotlinMoxyApplication.contributorsComponent.inject(this)
         super.onCreate(savedInstanceState)
         retainInstance = true
     }

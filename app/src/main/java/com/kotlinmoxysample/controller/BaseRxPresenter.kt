@@ -1,4 +1,4 @@
-package com.kotlinmoxysample.ui
+package com.kotlinmoxysample.controller
 
 import com.arellomobile.mvp.MvpPresenter
 import com.arellomobile.mvp.MvpView

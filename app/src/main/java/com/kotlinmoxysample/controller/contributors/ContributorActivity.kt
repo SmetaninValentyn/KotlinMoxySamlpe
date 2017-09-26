@@ -1,4 +1,4 @@
-package com.kotlinmoxysample.ui.contributors
+package com.kotlinmoxysample.controller.contributors
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -8,14 +8,17 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.kotlingithubapi.model.Contributor
 import com.kotlinmoxysample.R
-import com.kotlinmoxysample.ui.BaseActivity
-import com.kotlinmoxysample.ui.FragmentBackStack
+import com.kotlinmoxysample.app.KotlinMoxyApplication
+import com.kotlinmoxysample.controller.BaseActivity
+import com.kotlinmoxysample.controller.FragmentBackStack
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_contributor.*
 import kotlinx.android.synthetic.main.contributor_content.*
+import javax.inject.Inject
 
 
 @SuppressLint("Registered")
@@ -26,12 +29,18 @@ import kotlinx.android.synthetic.main.contributor_content.*
 // used activity for instead fragment for collapse toolbar
 class ContributorActivity : BaseActivity(), ContributorView {
 
+    @Inject
     @InjectPresenter
     lateinit var mPresenter: ContributorPresenter
 
+    @ProvidePresenter
+    fun providePresenter(): ContributorPresenter = mPresenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        KotlinMoxyApplication.contributorsComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contributor)
+
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

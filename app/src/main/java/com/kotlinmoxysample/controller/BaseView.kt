@@ -1,4 +1,4 @@
-package com.kotlinmoxysample.ui
+package com.kotlinmoxysample.controller
 
 import android.support.annotation.StringRes
 import com.arellomobile.mvp.MvpView

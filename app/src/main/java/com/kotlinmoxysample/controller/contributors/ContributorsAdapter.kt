@@ -1,4 +1,4 @@
-package com.kotlinmoxysample.ui.contributors
+package com.kotlinmoxysample.controller.contributors
 
 import android.content.Context
 import android.support.v4.view.ViewCompat

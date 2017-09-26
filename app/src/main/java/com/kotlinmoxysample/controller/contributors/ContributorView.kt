@@ -1,7 +1,7 @@
-package com.kotlinmoxysample.ui.contributors
+package com.kotlinmoxysample.controller.contributors
 
 import com.kotlingithubapi.model.Contributor
-import com.kotlinmoxysample.ui.BaseView
+import com.kotlinmoxysample.controller.BaseView
 
 /**
  * Created by Valentyn on 9/18/17.

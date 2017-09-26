@@ -19,14 +19,14 @@ import timber.log.Timber
 class ContributorPresenter(val baseDao: BaseDao?, val api: Api) : BaseRxPresenter<ContributorView>() {
 
     fun loadContributor(contributor : Contributor?) {
-        if(contributor == null) {}
+        if(contributor == null) { return }
 
-        if(contributor?.login.isNullOrEmpty()) {
-            showFromDb(contributor?.id)
+        if(contributor.login.isNullOrEmpty()) {
+            showFromDb(contributor.id)
             return
         }
 
-        val d = api.getContributor(contributor?.login)
+        val d = api.getContributor(contributor.login)
                 .doOnNext { baseDao?.put(it) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -39,10 +39,9 @@ class ContributorPresenter(val baseDao: BaseDao?, val api: Api) : BaseRxPresente
 
                         onError = {
                             view?.showProgress(false)
-                            showFromDb(contributor?.id)
+                            showFromDb(contributor.id)
                         }
                 )
-        view?.showProgress(true)
         mDisposable?.add(d)
     }
 

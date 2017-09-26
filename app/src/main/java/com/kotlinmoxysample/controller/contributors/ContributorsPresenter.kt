@@ -24,21 +24,21 @@ class ContributorsPresenter(val dao: ContributorsDao?, val api: Api) : BaseRxPre
     }
 
     fun loadContributors() {
-        viewState.showProgress(true)
+        view?.showProgress(true)
         val d = api.repoContributors("square", "retrofit")
                 .doOnNext { dao?.put(it) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = {
-                            viewState.showProgress(false)
+                            view?.showProgress(false)
                             viewState.showContributors(it)
                             Timber.d("Contributors $it")
                         },
 
                         onError = {
                             Timber.e("Contributors ${it.message}")
-                            viewState.showProgress(false)
+                            view?.showProgress(false)
 
                             val contributors = dao?.getContributors()
                             Timber.d("Contributors from db $contributors")

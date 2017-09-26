@@ -12,7 +12,7 @@ import io.objectbox.annotation.Id
 @Entity
 data class Contributor(
         @Id(assignable = true) var id: Long,
-        val login: String,
+        val login: String?,
         @SerializedName("html_url") val url: String?,
         val contributions: Int? = 0,
         @SerializedName("avatar_url") val avatarUrl: String?,

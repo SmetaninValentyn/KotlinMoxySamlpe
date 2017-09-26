@@ -41,7 +41,6 @@ class ContributorActivity : BaseActivity(), ContributorView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contributor)
 
-
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)

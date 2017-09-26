@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 /**
- * Created by User on 16.07.2017.
+ * Created by Valentyn on 16.07.2017.
  */
 interface Api {
 

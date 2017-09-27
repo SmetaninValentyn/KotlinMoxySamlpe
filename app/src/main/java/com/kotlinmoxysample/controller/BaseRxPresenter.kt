@@ -15,15 +15,11 @@ abstract class BaseRxPresenter<V : MvpView> : MvpPresenter<V>() {
     override fun attachView(view: V) {
         super.attachView(view)
         this.view = view
-    }
-
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
         mDisposable = CompositeDisposable()
     }
 
     override fun detachView(view: V) {
         super.detachView(view)
-        mDisposable?.dispose()
+        mDisposable?.clear()
     }
 }

@@ -8,6 +8,7 @@ import com.kotlinmoxysample.R
 import com.kotlinmoxysample.db.BaseDao
 import com.kotlinmoxysample.controller.BaseRxPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -16,10 +17,12 @@ import timber.log.Timber
  * Created by Valentyn on 9/19/17.
  */
 @InjectViewState
-class ContributorPresenter(val baseDao: BaseDao?, val api: Api) : BaseRxPresenter<ContributorView>() {
+class ContributorPresenter(private val baseDao: BaseDao?, private val api: Api) : BaseRxPresenter<ContributorView>() {
 
     fun loadContributor(contributor : Contributor?) {
         if(contributor == null) { return }
+
+        viewState.showContributor(contributor)
 
         if(contributor.login.isNullOrEmpty()) {
             showFromDb(contributor.id)
@@ -34,6 +37,7 @@ class ContributorPresenter(val baseDao: BaseDao?, val api: Api) : BaseRxPresente
                         onNext = {
                             view?.showProgress(false)
                             viewState.showContributor(it)
+                            this
                             Timber.d("Contributor $it")
                         },
 
@@ -60,4 +64,5 @@ class ContributorPresenter(val baseDao: BaseDao?, val api: Api) : BaseRxPresente
             view?.toast(R.string.err_something_wrong)
         }
     }
+
 }

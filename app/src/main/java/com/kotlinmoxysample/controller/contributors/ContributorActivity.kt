@@ -37,7 +37,7 @@ class ContributorActivity : BaseActivity(), ContributorView {
     fun providePresenter(): ContributorPresenter = mPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        KotlinMoxyApplication.contributorsComponent.inject(this)
+        KotlinMoxyApplication.appComponent.plusContributorsComponent(ContributorsModule()).inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contributor)
 
@@ -47,8 +47,6 @@ class ContributorActivity : BaseActivity(), ContributorView {
 
         val contributor = intent.extras?.get(ARG_CONTRIBUTOR) as Contributor?
         setImageTransition(intent.extras?.getString(ARG_TRANSITION_NAME))
-
-        showContributor(contributor)
 
         mPresenter.loadContributor(contributor)
     }

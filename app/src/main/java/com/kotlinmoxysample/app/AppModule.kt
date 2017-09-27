@@ -24,7 +24,7 @@ class AppModule(val app: KotlinMoxyApplication) {
     @Provides
     @NotNull
     @Singleton
-    fun providesApiClient(): Api = RestClient().createService(Api::class.java)
+    fun providesApiClient(): Api = RestClient().createService()
 
     @Provides
     @NotNull

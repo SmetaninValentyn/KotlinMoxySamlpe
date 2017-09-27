@@ -13,15 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RestClient {
 
-    private var baseUrl = BuildConfig.API_ENDPOINT
-
-    /**
-     * Check rest client statics api urls
-     * @param baseUrl
-     */
-    fun setBaseUrl(baseUrl: String) {
-        this.baseUrl = baseUrl
-    }
+    private val baseUrl = BuildConfig.API_ENDPOINT
 
     private var httpClient = OkHttpClient.Builder()
 
@@ -52,6 +44,8 @@ class RestClient {
     fun getRetrofit(): Retrofit {
         return builder.client(httpClient.build()).build()
     }
+
+    inline fun <reified T> createService(): T = getRetrofit().create(T::class.java)
 
     fun <T> createService(serviceClass: Class<T>): T {
         val retrofit = getRetrofit()

@@ -29,6 +29,8 @@ import javax.inject.Inject
 // used activity for instead fragment for collapse toolbar
 class ContributorActivity : BaseActivity(), ContributorView {
 
+    private val component by lazy { KotlinMoxyApplication.appComponent.plus(ContributorsModule()) }
+
     @Inject
     @InjectPresenter
     lateinit var mPresenter: ContributorPresenter
@@ -37,7 +39,7 @@ class ContributorActivity : BaseActivity(), ContributorView {
     fun providePresenter(): ContributorPresenter = mPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        KotlinMoxyApplication.appComponent.plusContributorsComponent(ContributorsModule()).inject(this)
+        component.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contributor)
 

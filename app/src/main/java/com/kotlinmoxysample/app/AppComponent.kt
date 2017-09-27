@@ -20,5 +20,5 @@ interface AppComponent {
 
     fun inject(application: KotlinMoxyApplication)
 
-    fun plusContributorsComponent(contributorsModule: ContributorsModule): ContributorsComponent
+    fun plus(contributorsModule: ContributorsModule): ContributorsComponent
 }

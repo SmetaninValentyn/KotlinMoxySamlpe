@@ -23,6 +23,8 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
  */
 class ContributorsFragment : BaseFragment(), ContributorsView {
 
+    private val component by lazy { KotlinMoxyApplication.appComponent.plus(ContributorsModule()) }
+
     @Inject
     @InjectPresenter
     lateinit var mPresenter: ContributorsPresenter
@@ -39,7 +41,7 @@ class ContributorsFragment : BaseFragment(), ContributorsView {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        KotlinMoxyApplication.appComponent.plusContributorsComponent(ContributorsModule()).inject(this)
+        component.inject(this)
         super.onCreate(savedInstanceState)
         retainInstance = true
     }

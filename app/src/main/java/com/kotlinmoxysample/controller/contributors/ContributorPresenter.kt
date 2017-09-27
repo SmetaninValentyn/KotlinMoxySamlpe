@@ -37,7 +37,6 @@ class ContributorPresenter(private val baseDao: BaseDao?, private val api: Api) 
                         onNext = {
                             view?.showProgress(false)
                             viewState.showContributor(it)
-                            this
                             Timber.d("Contributor $it")
                         },
 

@@ -122,7 +122,9 @@ class FragmentBackStack(var fragmentManager: FragmentManager,
     fun backTo(clazz: Class<*>) {
         val fragmentTag = clazz.simpleName
         if (containsInContainer(fragmentTag)) {
-            while (peek() != fragmentTag) {
+            while (peek() != fragmentTag &&
+                    (!fragmentManager.fragments.isEmpty()
+                            || fragmentManager.backStackEntryCount != 0)) {
                 fragmentManager.popBackStackImmediate()
             }
         }

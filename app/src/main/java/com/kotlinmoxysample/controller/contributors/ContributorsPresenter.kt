@@ -19,7 +19,7 @@ import timber.log.Timber
 @InjectViewState
 class ContributorsPresenter(val dao: ContributorsDao?, val api: Api) : BaseRxPresenter<ContributorsView>() {
 
-    fun onContributorClicked(contributor: Contributor?, avatarView : View? = null) {
+    fun onContributorClicked(contributor: Contributor?, avatarView: View? = null) {
         view?.onContributorClick(contributor, avatarView)
     }
 
@@ -42,7 +42,7 @@ class ContributorsPresenter(val dao: ContributorsDao?, val api: Api) : BaseRxPre
 
                             val contributors = dao?.getContributors()
                             Timber.d("Contributors from db $contributors")
-                            if(contributors != null) {
+                            if (contributors != null) {
                                 viewState.showContributors(contributors)
                             } else {
                                 view?.toast(R.string.err_something_wrong)

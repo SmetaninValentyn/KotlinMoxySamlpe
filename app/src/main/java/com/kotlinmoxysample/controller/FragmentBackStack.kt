@@ -29,7 +29,7 @@ class FragmentBackStack(var fragmentManager: FragmentManager,
                     ?.replace(fragmentContainerID, fragment, fragment.javaClass.simpleName)
                     ?.setTransition(FragmentTransaction.TRANSIT_NONE)?.commit()
         } else {
-            fragmentManager.beginTransaction()?.replace(fragmentContainerID, fragment)
+            fragmentManager.beginTransaction()?.replace(fragmentContainerID, fragment, fragment.javaClass.simpleName)
                     ?.setTransition(FragmentTransaction.TRANSIT_NONE)
                     ?.addToBackStack(fragment.javaClass.simpleName)?.commit()
         }
@@ -92,14 +92,11 @@ class FragmentBackStack(var fragmentManager: FragmentManager,
      */
     @Synchronized
     fun clear(): Boolean? {
-        var result: Boolean?
-        try {
-            result = fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        return try {
+            fragmentManager.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         } catch (ignored: IllegalStateException) {
-            result = false
+            false
         }
-
-        return result
     }
 
     /**
@@ -109,23 +106,40 @@ class FragmentBackStack(var fragmentManager: FragmentManager,
      */
     @Synchronized
     fun raise(fragmentTag: String?, inclusive: Boolean): Boolean {
-        var result: Boolean
-        try {
-            result = fragmentTag != null && fragmentManager.popBackStackImmediate(fragmentTag, if (inclusive) FragmentManager.POP_BACK_STACK_INCLUSIVE else 0)
+        return try {
+            fragmentTag != null && fragmentManager.popBackStackImmediate(fragmentTag, if (inclusive) FragmentManager.POP_BACK_STACK_INCLUSIVE else 0)
         } catch (ignored: IllegalStateException) {
-            result = false
+            false
         }
-
-        return result
-
     }
 
+    /**
+     * Pop fragments to target
+     *
+     * @param clazz class of target fragment
+     */
+    @Synchronized
+    fun backTo(clazz: Class<*>) {
+        val fragmentTag = clazz.simpleName
+        if (containsInContainer(fragmentTag)) {
+            while (peek() != fragmentTag) {
+                fragmentManager.popBackStackImmediate()
+            }
+        }
+    }
+
+    /**
+     * Check fragment contains in back stack
+     *
+     * @param fragmentTag tag of target fragment
+     * @return contain fragment in back stack
+     */
     operator fun contains(fragmentTag: String?): Boolean {
         if (fragmentTag != null) {
             val count = getStackEntryCount()
 
             for (entry in 0 until count) {
-                if (fragmentTag == fragmentManager.getBackStackEntryAt(entry)?.name) {
+                if (fragmentTag == fragmentManager.getBackStackEntryAt(entry).name) {
                     return true
                 }
             }
@@ -134,9 +148,24 @@ class FragmentBackStack(var fragmentManager: FragmentManager,
         return false
     }
 
-    fun getStackEntryCount(): Int {
-        return fragmentManager.backStackEntryCount
+    /**
+     * Check fragment contains in container
+     *
+     * @param fragmentTag tag of target fragment
+     * @return contain fragment in container (including back stack)
+     */
+    private fun containsInContainer(fragmentTag: String?): Boolean {
+        if (fragmentTag.isNullOrEmpty()) return false
+
+        val fragmentByTag = fragmentManager.findFragmentByTag(fragmentTag)
+        return fragmentByTag != null
     }
+
+    /**
+     * @return count of fragments in back stack
+     */
+    fun getStackEntryCount(): Int = fragmentManager.backStackEntryCount
+
 
     class Retainer : Fragment() {
         // data object we want to retain

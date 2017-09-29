@@ -36,6 +36,11 @@ abstract class BaseActivity : MvpAppCompatActivity(), BaseView {
         setToolbarTitle(mTitle ?: "")
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mRetainer?.retain(mBackstack)
+    }
+
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         outState?.putString(ARG_TITLE, getToolbarTitle().toString())

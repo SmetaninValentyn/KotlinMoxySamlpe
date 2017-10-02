@@ -20,25 +20,25 @@ import timber.log.Timber
 class ContributorsPresenter(val dao: ContributorsDao?, val api: Api) : BaseRxPresenter<ContributorsView>() {
 
     fun onContributorClicked(contributor: Contributor?, avatarView: View? = null) {
-        view?.onContributorClick(contributor, avatarView)
+        viewState?.onContributorClick(contributor, avatarView)
     }
 
     fun loadContributors() {
-        view?.showProgress(true)
+        viewState?.showProgress(true)
         val d = api.repoContributors("square", "retrofit")
                 .doOnNext { dao?.put(it) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = {
-                            view?.showProgress(false)
+                            viewState?.showProgress(false)
                             viewState.showContributors(it)
                             Timber.d("Contributors $it")
                         },
 
                         onError = {
                             Timber.e("Contributors ${it.message}")
-                            view?.showProgress(false)
+                            viewState?.showProgress(false)
 
                             val contributors = dao?.getContributors()
                             Timber.d("Contributors from db $contributors")

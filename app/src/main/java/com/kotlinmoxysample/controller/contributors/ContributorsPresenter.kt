@@ -20,7 +20,7 @@ import timber.log.Timber
 class ContributorsPresenter(val dao: ContributorsDao?, val api: Api) : BaseRxPresenter<ContributorsView>() {
 
     fun onContributorClicked(contributor: Contributor?, avatarView: View? = null) {
-        viewState?.onContributorClick(contributor, avatarView)
+        view?.onContributorClick(contributor, avatarView)
     }
 
     fun loadContributors() {

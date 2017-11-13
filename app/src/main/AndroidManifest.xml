@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".controller.contributors.ContributorActivity"
+        <activity android:name=".controller.contributordetail.ContributorDetailActivity"
             android:theme="@style/TransparentTheme"/>
     </application>
 

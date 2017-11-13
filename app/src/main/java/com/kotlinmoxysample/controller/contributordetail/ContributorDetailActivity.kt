@@ -1,4 +1,4 @@
-package com.kotlinmoxysample.controller.contributors
+package com.kotlinmoxysample.controller.contributordetail
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -9,10 +9,11 @@ import android.view.MenuItem
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.kotlingithubapi.di.contributordetail.ContributorDetailModule
 import com.kotlingithubapi.model.Contributor
 import com.kotlinmoxysample.R
 import com.kotlinmoxysample.app.KotlinMoxyApplication
-import com.kotlinmoxysample.controller.BaseActivity
+import com.kotlinmoxysample.controller.base.BaseActivity
 import com.kotlinmoxysample.controller.FragmentBackStack
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -27,16 +28,16 @@ import javax.inject.Inject
  * Created by Valentyn on 9/18/17.
  */
 // used activity for instead fragment for collapse toolbar
-class ContributorActivity : BaseActivity(), ContributorView {
+class ContributorDetailActivity : BaseActivity(), ContributorDetailView {
 
-    private val component by lazy { KotlinMoxyApplication.appComponent.plus(ContributorsModule()) }
+    private val component by lazy { KotlinMoxyApplication.appComponent.plus(ContributorDetailModule()) }
 
     @Inject
     @InjectPresenter
-    lateinit var mPresenter: ContributorPresenter
+    lateinit var mPresenter: ContributorDetailPresenter
 
     @ProvidePresenter
-    fun providePresenter(): ContributorPresenter = mPresenter
+    fun providePresenter(): ContributorDetailPresenter = mPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         component.inject(this)
@@ -143,7 +144,7 @@ class ContributorActivity : BaseActivity(), ContributorView {
         val ARG_TRANSITION_NAME = "arg_transitions_name"
 
         fun newIntent(activity: Activity, contributor: Contributor, transitionName : String? = null) : Intent {
-            val intent = Intent(activity, ContributorActivity::class.java)
+            val intent = Intent(activity, ContributorDetailActivity::class.java)
             val bundle = Bundle()
             bundle.putParcelable(ARG_CONTRIBUTOR, contributor)
             bundle.putString(ARG_TRANSITION_NAME, transitionName)

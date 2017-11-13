@@ -12,11 +12,13 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.kotlingithubapi.model.Contributor
 import com.kotlinmoxysample.R
 import com.kotlinmoxysample.app.KotlinMoxyApplication
-import com.kotlinmoxysample.controller.BaseFragment
+import com.kotlinmoxysample.controller.base.BaseFragment
 import com.kotlinmoxysample.controller.contributors.ContributorsAdapter.ContributorClickListener
 import kotlinx.android.synthetic.main.fragment_contributors.*
 import javax.inject.Inject
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.kotlingithubapi.di.contributors.ContributorsModule
+import com.kotlinmoxysample.controller.contributordetail.ContributorDetailActivity
 
 /**
  * Created by Valentyn on 9/18/17.
@@ -79,7 +81,7 @@ class ContributorsFragment : BaseFragment(), ContributorsView {
 
     override fun onContributorClick(contributor: Contributor?, avatarView: View?) {
         if(contributor != null) {
-            val intent = ContributorActivity.newIntent(mActivity, contributor, ViewCompat.getTransitionName(avatarView))
+            val intent = ContributorDetailActivity.newIntent(mActivity, contributor, ViewCompat.getTransitionName(avatarView))
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
                     avatarView, ViewCompat.getTransitionName(avatarView))
             startActivity(intent, options.toBundle())

@@ -1,10 +1,11 @@
-package com.kotlinmoxysample.controller
+package com.kotlinmoxysample.controller.base
 
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.annotation.StringRes
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.kotlingithubapi.utils.toast
+import com.kotlinmoxysample.controller.FragmentBackStack
 
 /**
  * Created by Valentyn on 9/18/17.

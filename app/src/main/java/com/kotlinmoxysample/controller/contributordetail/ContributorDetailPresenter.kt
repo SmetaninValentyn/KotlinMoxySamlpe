@@ -1,14 +1,12 @@
-package com.kotlinmoxysample.controller.contributors
+package com.kotlinmoxysample.controller.contributordetail
 
 import com.arellomobile.mvp.InjectViewState
 import com.kotlingithubapi.model.Contributor
 import com.kotlingithubapi.network.Api
-import com.kotlingithubapi.network.RestClient
 import com.kotlinmoxysample.R
 import com.kotlinmoxysample.db.BaseDao
-import com.kotlinmoxysample.controller.BaseRxPresenter
+import com.kotlinmoxysample.controller.base.BaseRxPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
@@ -17,7 +15,7 @@ import timber.log.Timber
  * Created by Valentyn on 9/19/17.
  */
 @InjectViewState
-class ContributorPresenter(private val baseDao: BaseDao?, private val api: Api) : BaseRxPresenter<ContributorView>() {
+class ContributorDetailPresenter(private val baseDao: BaseDao?, private val api: Api) : BaseRxPresenter<ContributorDetailView>() {
 
     fun loadContributor(contributor : Contributor?) {
         if(contributor == null) { return }

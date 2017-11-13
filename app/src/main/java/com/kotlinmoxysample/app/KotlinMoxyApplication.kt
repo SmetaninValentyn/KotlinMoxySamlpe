@@ -1,6 +1,9 @@
 package com.kotlinmoxysample.app
 
 import android.app.Application
+import com.kotlinmoxysample.di.AppComponent
+import com.kotlinmoxysample.di.AppModule
+import com.kotlinmoxysample.di.DaggerAppComponent
 import timber.log.Timber
 
 /**

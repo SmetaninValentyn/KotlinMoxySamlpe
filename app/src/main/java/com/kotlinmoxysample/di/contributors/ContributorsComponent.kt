@@ -1,5 +1,7 @@
-package com.kotlinmoxysample.controller.contributors
+package com.kotlingithubapi.di.contributors
 
+import com.kotlinmoxysample.controller.contributors.ContributorsFragment
+import com.kotlinmoxysample.controller.contributors.ContributorsPresenter
 import dagger.Subcomponent
 
 /**
@@ -9,9 +11,6 @@ import dagger.Subcomponent
 @ForContributors
 interface ContributorsComponent {
     fun inject(fragment: ContributorsFragment)
-    fun inject(fragment: ContributorActivity)
 
     fun presenterContributors(): ContributorsPresenter
-    fun presenterContributor(): ContributorPresenter
-
 }

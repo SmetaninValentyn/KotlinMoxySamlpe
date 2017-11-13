@@ -1,9 +1,10 @@
-package com.kotlinmoxysample.app
+package com.kotlinmoxysample.di
 
 import android.content.Context
 import com.kotlingithubapi.model.MyObjectBox
 import com.kotlingithubapi.network.Api
 import com.kotlingithubapi.network.RestClient
+import com.kotlinmoxysample.app.KotlinMoxyApplication
 import dagger.Module
 import dagger.Provides
 import io.objectbox.BoxStore

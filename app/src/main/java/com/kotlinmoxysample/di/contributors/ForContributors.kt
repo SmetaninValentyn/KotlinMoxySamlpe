@@ -1,4 +1,4 @@
-package com.kotlinmoxysample.controller.contributors
+package com.kotlingithubapi.di.contributors
 
 import javax.inject.Scope
 
@@ -6,5 +6,5 @@ import javax.inject.Scope
  * Created by Valentyn on 9/26/17.
  */
 @Scope
-@Retention(AnnotationRetention.RUNTIME)
+@Retention(AnnotationRetention.SOURCE)
 annotation class ForContributors

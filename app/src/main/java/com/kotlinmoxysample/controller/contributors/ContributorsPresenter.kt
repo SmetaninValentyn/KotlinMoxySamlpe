@@ -4,10 +4,9 @@ import android.view.View
 import com.arellomobile.mvp.InjectViewState
 import com.kotlingithubapi.model.Contributor
 import com.kotlingithubapi.network.Api
-import com.kotlingithubapi.network.RestClient
 import com.kotlinmoxysample.R
 import com.kotlinmoxysample.db.ContributorsDao
-import com.kotlinmoxysample.controller.BaseRxPresenter
+import com.kotlinmoxysample.controller.base.BaseRxPresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers

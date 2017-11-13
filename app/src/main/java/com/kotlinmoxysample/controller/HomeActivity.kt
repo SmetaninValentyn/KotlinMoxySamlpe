@@ -3,6 +3,7 @@ package com.kotlinmoxysample.controller
 import android.os.Bundle
 import android.view.View
 import com.kotlinmoxysample.R
+import com.kotlinmoxysample.controller.base.BaseActivity
 import com.kotlinmoxysample.controller.contributors.ContributorsFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.toolbar.view.*

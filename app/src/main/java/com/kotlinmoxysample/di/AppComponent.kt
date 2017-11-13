@@ -1,9 +1,12 @@
-package com.kotlinmoxysample.app
+package com.kotlinmoxysample.di
 
 import android.content.Context
+import com.kotlingithubapi.di.contributordetail.ContributorDetailComponent
+import com.kotlingithubapi.di.contributordetail.ContributorDetailModule
+import com.kotlingithubapi.di.contributors.ContributorsComponent
+import com.kotlingithubapi.di.contributors.ContributorsModule
 import com.kotlingithubapi.network.Api
-import com.kotlinmoxysample.controller.contributors.ContributorsComponent
-import com.kotlinmoxysample.controller.contributors.ContributorsModule
+import com.kotlinmoxysample.app.KotlinMoxyApplication
 import dagger.Component
 import io.objectbox.BoxStore
 import javax.inject.Singleton
@@ -21,4 +24,5 @@ interface AppComponent {
     fun inject(application: KotlinMoxyApplication)
 
     fun plus(contributorsModule: ContributorsModule): ContributorsComponent
+    fun plus(contributorDetailModule: ContributorDetailModule): ContributorDetailComponent
 }

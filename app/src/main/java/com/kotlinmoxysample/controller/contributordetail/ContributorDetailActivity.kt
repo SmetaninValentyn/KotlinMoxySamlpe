@@ -17,7 +17,7 @@ import com.kotlinmoxysample.controller.base.BaseActivity
 import com.kotlinmoxysample.controller.FragmentBackStack
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_contributor.*
+import kotlinx.android.synthetic.main.activity_contributor_detail.*
 import kotlinx.android.synthetic.main.contributor_content.*
 import javax.inject.Inject
 
@@ -42,7 +42,7 @@ class ContributorDetailActivity : BaseActivity(), ContributorDetailView {
     override fun onCreate(savedInstanceState: Bundle?) {
         component.inject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_contributor)
+        setContentView(R.layout.activity_contributor_detail)
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
